@@ -1,0 +1,38 @@
+def majority_element(nums):
+    if not nums:
+        return []
+
+    c1, c2 = None, None
+    count1, count2 = 0, 0
+
+    for num in nums:
+        if num == c1:
+            count1 += 1
+        elif num == c2:
+            count2 += 1
+        elif count1 == 0:
+            c1, count1 = num, 1
+        elif count2 == 0:
+            c2, count2 = num, 1
+        else:
+            count1 -= 1
+            count2 -= 1
+
+    count1, count2 = 0, 0
+    for num in nums:
+        if num == c1:
+            count1 += 1
+        elif num == c2:
+            count2 += 1
+    result = []
+    if count1 > len(nums) // 3:
+        result.append(c1)
+    if count2 > len(nums) // 3:
+        result.append(c2)
+
+    return result
+
+nums = [3, 2, 3]
+result = majority_element(nums)
+print(result)
+
