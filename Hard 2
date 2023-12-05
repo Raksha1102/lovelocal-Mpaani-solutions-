@@ -1,0 +1,21 @@
+def shortest_palindrome(s):
+    def palin(pattern):
+        m = len(pattern)
+        p = [0] * m
+        j = 0
+        for i in range(1, m):
+            while j > 0 and pattern[i] != pattern[j]:
+                j = p[j - 1]
+            if pattern[i] == pattern[j]:
+                j += 1
+            p[i] = j
+        return p
+    prefix = s + '#' + s[::-1]
+    p = palin(prefix)
+
+    longest_palindrome_prefix_len = p[-1]
+    return s[longest_palindrome_prefix_len:][::-1] + s
+
+s = input()
+result = shortest_palindrome(s)
+print(result)
